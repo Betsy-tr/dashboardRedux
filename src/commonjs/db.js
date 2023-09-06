@@ -29,6 +29,7 @@ export const getOneById = async (collectionName , id) => {
     }
 }
 
+
 /**
    created by : didier
    30/08/2023
