@@ -8,7 +8,7 @@ const Lister = () => {
 
     const initData = async () => { 
 
-        const dataTemp = await getAll('question')
+        const dataTemp = await getAll('DareOrTruth')
         setAsks(dataTemp)
     }
 
@@ -29,8 +29,8 @@ const Lister = () => {
                     <tr>
                         <th></th>
                         <th className='font-serif text-[#14b0dd] text-2xl'>Catégorie</th>
-                        <th className='font-serif text-[#14b0dd] text-2xl'>Question</th>
-                        <th className='font-serif text-[#14b0dd] text-2xl'>Degré</th>
+                        <th className='font-serif text-[#14b0dd] text-2xl'>Action / Vérité</th>
+                        <th className='font-serif text-[#14b0dd] text-2xl'>Type</th>
                     </tr>
                 </thead>
 

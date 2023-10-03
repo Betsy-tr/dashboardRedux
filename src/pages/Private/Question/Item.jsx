@@ -7,8 +7,14 @@ const Item = ({question}) => {
 
   const getCategorie = async () => { 
 
-    const dataCategorie = await getOneById('categorie' , question.categorie)
-    setCategorie(dataCategorie)
+    if (question.categorie != undefined) {
+      
+      const dataCategorie = await getOneById('categorie' , question.categorie)
+      setCategorie(dataCategorie)
+
+    }
+
+    
 
   }
 
@@ -23,8 +29,9 @@ const Item = ({question}) => {
         
             <tr>
                 <th></th>
-                <td className='font-serif text-white text-xl'>{categorie?.name}</td>
-                <td className='font-serif text-white text-xl'>{question?.name}</td>
+                <td className='font-serif text-black text-xl'>{categorie?.name}</td>
+                <td className='font-serif text-black text-xl'>{question?.title}</td>
+                <td className='font-serif text-black text-xl'>{question?.type}</td>
                 <td></td>
             </tr>
         

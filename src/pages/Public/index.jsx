@@ -1,21 +1,24 @@
 import React from 'react'
 import { loginByEmail, logout } from '../../commonjs/auth'
+import { useForm } from 'react-hook-form'
 
 
 const Public = () => {
 
-    const login = async (event) => { 
-        
-        event.preventDefault()
-        console.log(event)
+    const {register , handleSubmit , formState:{errors} } = useForm() // Initialisation du hook (useForm) pour la gestion d'erreurs
 
-        const {email , password } = event.target
+    const login = async (data) => { 
         
-        loginByEmail(email.value , password.value).then(user =>{
+        //event.preventDefault()
+         console.log(data)
 
-        }).catch(error =>{
-            console.log('error' , error)
-        })
+        const {email , password } = data
+        
+         loginByEmail(email , password).then(user =>{
+
+         }).catch(error =>{
+             console.log('error' , error)
+         })
     }
 
   return (
@@ -27,7 +30,7 @@ const Public = () => {
                         <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
                     </div>
 
-                    <form onSubmit={login}>
+                    <form onSubmit={handleSubmit(login)}> {/* Avant d'envoyer, on contrôle */}
 
                         <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                             <div className="card-body">
@@ -35,13 +38,19 @@ const Public = () => {
                                     <label className="label">
                                         <span className="label-text">Email</span>
                                     </label>
-                                    <input type="text" name='email' placeholder="email" className="input input-bordered" />
+                                    <input type="text" name='email' {...register('email' , {required: true})} placeholder="email" className="input input-bordered" />
+                                    {errors.email && <label className="label">
+                                        <span className="label-text-alt text-red-700">L'email est requis</span>
+                                    </label>}
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
                                         <span className="label-text">Password</span>
                                     </label>
-                                    <input type="password" name='password' placeholder="password" className="input input-bordered" />
+                                    <input type="password" name='password' {...register('password' , {required: true})} placeholder="password" className="input input-bordered" />
+                                    {errors.password && <label className="label">
+                                        <span className="label-text-alt text-red-700">Le mot de passe est requis</span>
+                                    </label>}
                                     <label className="label">
                                         <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                                     </label>

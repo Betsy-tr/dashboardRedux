@@ -8,6 +8,7 @@ const Ajouter = () => {
     const [askName , setAskName] = useState("");
     const [categories , setCategories] = useState([])
     const [selectedCategorie , setSelectedCategorie] = useState("")
+    const [selectedDareOrTruth , setSelectedDareOrTruth] = useState("")
 
     // Initialisation des handles
     const handleChangeAsk = (event) => { // Changement d'état du input
@@ -21,6 +22,12 @@ const Ajouter = () => {
 
     }
 
+    const handleDropDareOrTruth = (event) => { // Changement d'état du select
+
+        setSelectedDareOrTruth(event.target.value)
+
+    }
+
 
 
     const save = async () => { 
@@ -30,8 +37,10 @@ const Ajouter = () => {
             console.log('save')
             const data = {
                 categorie : selectedCategorie ,
-                name : askName} // Formatage de la data sous forme d'objet
-            await addDataToCollection("question" , data)
+                title : askName , // Formatage de la data sous forme d'objet
+                type : selectedDareOrTruth
+            }
+            await addDataToCollection("DareOrTruth" , data)
 
             setAskName("") // Remise à 0 du formulaire
 
@@ -56,13 +65,19 @@ const Ajouter = () => {
     }, [])
 
   return (
-    <div className='flex flex-row gap-4 justify-center w-full mt-10'>
-        <select value={selectedCategorie} onChange={handleDropCategorie} className="select select-info w-full max-w-xs font-serif text-white">
-            <option defaultValue={''} className='font-serif text-white text-sm'>Sélectionner une catégorie</option>
-            {categories?.map(data =><option key={data.id} value={data.id} className='font-serif text-white text-sm'>{data.name}</option>)}
+    <div className='flex flex-row gap-4 justify-center w-full mt-10 ml-28'>
+        <select value={selectedCategorie} onChange={handleDropCategorie} className="select select-info w-full max-w-xs font-serif text-black">
+            <option defaultValue={''} className='font-serif text-black text-sm'>Sélectionner une catégorie</option>
+            {categories?.map(data =><option key={data.id} value={data.id} className='font-serif text-black text-sm'>{data.name}</option>)}
         </select>
-        <input type="text" value={askName} onChange={handleChangeAsk} className='input input-bordered input-[#14b0dd] w-full max-w-xs border border-[#14b0dd] text-white' />
-        <button onClick={save} type="submit" className='inline-block cursor-pointer rounded-md bg-[#14b0dd] font-serif text-white py-3 px-5 text-xl font-semibold'>Ajouter</button>
+        <select value={selectedDareOrTruth} onChange={handleDropDareOrTruth} className="select select-info w-full max-w-xs font-serif text-black">
+            <option defaultValue={''} className='font-serif text-black text-sm'>Sélectionner un type</option>
+            <option value={'dare'}>Action</option>
+            <option value={'truth'}>Vérité</option>
+        </select>
+
+        <input type="text" value={askName} onChange={handleChangeAsk} className='input input-bordered input-[#14b0dd] w-full max-w-xs border border-[#14b0dd] text-black' />
+        <button onClick={save} type="submit" className='inline-block cursor-pointer rounded-md bg-[#14b0dd] font-serif text-black py-3 px-5 text-xl font-semibold'>Ajouter</button>
     </div>
   )
 }
