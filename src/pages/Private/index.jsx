@@ -8,7 +8,7 @@ import Navbar from './common/Navbar'
 import Layout from './common/Layout'
 import Home from './Home'
 import Categorie from './Categorie'
-import SousCategorie from './SousCategorie'
+// import SousCategorie from './SousCategorie'
 import NoMatch from '../NoMatch'
 import Question from './Question'
 
@@ -29,7 +29,7 @@ const index = () => {
 
               <Route index element={<Home/>}/>
               <Route path='/categorie' element={<Categorie/>}/>
-              <Route path='/souscategorie' element={<SousCategorie/>}/>
+              {/* <Route path='/souscategorie' element={<SousCategorie/>}/> */}
               <Route path='/question' element={<Question/>}/>
               <Route path='*' element={<NoMatch/>}/>
 
