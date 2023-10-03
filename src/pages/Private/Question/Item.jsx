@@ -4,6 +4,7 @@ import { getOneById } from '../../../commonjs/db'
 const Item = ({question}) => {
 
   const [categorie , setCategorie] = useState({})
+  const [sousCategorie , setSousCategorie] = useState({})
 
   const getCategorie = async () => { 
 
@@ -14,13 +15,23 @@ const Item = ({question}) => {
 
     }
 
-    
+  }
+
+  const getSousCategorie = async () => { 
+
+    if (question.sousCategorie != undefined) {
+      
+      const dataSousCategorie = await getOneById('sousCategorie' , question.sousCategorie)
+      setCategorie(dataSousCategorie)
+
+    }
 
   }
 
   useEffect(() => {
 
    getCategorie()
+   getSousCategorie()
 
   }, [])
    
@@ -30,6 +41,7 @@ const Item = ({question}) => {
             <tr>
                 <th></th>
                 <td className='font-serif text-black text-xl'>{categorie?.name}</td>
+                <td className='font-serif text-black text-xl'>{sousCategorie?.name}</td>
                 <td className='font-serif text-black text-xl'>{question?.title}</td>
                 <td className='font-serif text-black text-xl'>{question?.type}</td>
                 <td></td>
